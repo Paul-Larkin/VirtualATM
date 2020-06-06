@@ -24,7 +24,7 @@ public class VirtualATMGUI {
 	}// main
 	
 	VirtualATMGUI() {
-		//existingAccounts = readObject();
+		existingAccounts = readObject();
 		welcomeScreen();
 	}
 	
@@ -59,14 +59,14 @@ public class VirtualATMGUI {
 			JOptionPane.showMessageDialog(null, "****Account Created Successfully****");
 			mainOptionScreen(newAccount);
 		} else {
-			JOptionPane.showMessageDialog(null, "****ACCOUNT NUMBER EXISTS****", "****ERROR****", 0);
+			JOptionPane.showMessageDialog(null, "****ACCOUNT NUMBER EXISTS****", "****ERROR****", JOptionPane.WARNING_MESSAGE);
 			welcomeScreen();
 		}		
 	}
 	
 	public void signIn() {
 		if(existingAccounts.size() < 1) {
-			JOptionPane.showMessageDialog(null, "****NO SAVED ACCOUNTS PLEASE CREATE****");
+			JOptionPane.showMessageDialog(null, "****NO SAVED ACCOUNTS PLEASE CREATE****", "****ERROR****", JOptionPane.WARNING_MESSAGE);
 			welcomeScreen();
 		}
 		String accountNum = JOptionPane.showInputDialog(null, "Account Number: ").trim();
@@ -78,7 +78,7 @@ public class VirtualATMGUI {
 			Account existingAccount = existingAccounts.get(indexOfExisting);
 			mainOptionScreen(existingAccount);
 		} else {
-			JOptionPane.showMessageDialog(null, "****INCORRECT USERNAME OR PASSWORD****", "****ERROR****", 0);
+			JOptionPane.showMessageDialog(null, "****INCORRECT USERNAME OR PASSWORD****", "****ERROR****", JOptionPane.WARNING_MESSAGE);
 			welcomeScreen();
 		}
 	}
@@ -150,9 +150,7 @@ public class VirtualATMGUI {
 	}
 	public void writeObject(List<Account> accountList) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
-			// For jar
-			//ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("accounts.ser"));
 			oos.writeObject(existingAccounts);
 			oos.close();
 			JOptionPane.showMessageDialog(null, "SUCCESS");
@@ -166,9 +164,7 @@ public class VirtualATMGUI {
 	public static List<Account> readObject() {
 		List<Account> deserializedList = new ArrayList<>();
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
-			// For jar
-			//ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("accounts.ser"));
 			deserializedList = (List<Account>) ois.readObject();
 			ois.close();
 			//JOptionPane.showMessageDialog(null, "SUCCESS");
