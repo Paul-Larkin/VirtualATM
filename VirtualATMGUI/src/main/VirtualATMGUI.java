@@ -24,7 +24,7 @@ public class VirtualATMGUI {
 	}// main
 	
 	VirtualATMGUI() {
-		existingAccounts = readObject();
+		//existingAccounts = readObject();
 		welcomeScreen();
 	}
 	
@@ -150,7 +150,9 @@ public class VirtualATMGUI {
 	}
 	public void writeObject(List<Account> accountList) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\realp\\eclipse-workspace-java\\VirtualATMGUI\\src\\main\\accounts.ser"));
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
+			// For jar
+			//ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
 			oos.writeObject(existingAccounts);
 			oos.close();
 			JOptionPane.showMessageDialog(null, "SUCCESS");
@@ -164,7 +166,9 @@ public class VirtualATMGUI {
 	public static List<Account> readObject() {
 		List<Account> deserializedList = new ArrayList<>();
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\realp\\eclipse-workspace-java\\VirtualATMGUI\\src\\main\\accounts.ser"));
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
+			// For jar
+			//ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\realp\\git\\VirtualATM\\VirtualATMGUI\\src\\main\\accounts.ser"));
 			deserializedList = (List<Account>) ois.readObject();
 			ois.close();
 			//JOptionPane.showMessageDialog(null, "SUCCESS");
